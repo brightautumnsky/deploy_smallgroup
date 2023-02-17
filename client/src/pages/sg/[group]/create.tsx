@@ -79,7 +79,9 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
       throw new Error("쿠키가 존재하지 않습니다.");
     }
 
-    await axios.get("/auth/me", { headers: { cookie } });
+    await axios.get(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/auth/me`, {
+      headers: { cookie },
+    });
     return { props: {} };
   } catch (e) {
     res.writeHead(307, { Location: "/login" }).end();
